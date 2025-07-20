@@ -1,11 +1,20 @@
-# README
+# OwlLock 🦉🔐
+
+A secure, cross-platform password manager with owl-like vigilance built with Go and Vue.js.
 
 ## About
 
-This is the official Wails Vue template.
+OwlLock is a modern password manager that keeps your passwords secure with advanced encryption and provides a user-friendly interface for managing your credentials.
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+### Features
+
+- 🔐 **Secure Password Storage**: SQLite database with encryption
+- 🎲 **Password Generation**: Cryptographically secure password generator
+- 🌐 **Cross-Platform**: Works on Windows, macOS, and Linux
+- 🎨 **Modern UI**: Beautiful Vue.js interface with dark/light themes
+- 🌍 **Multi-Language**: Supports English and Turkish
+- ⚙️ **Configurable**: JSON-based configuration system
+- 🦉 **System Fingerprinting**: Unique passwords based on system characteristics
 
 ## Live Development
 

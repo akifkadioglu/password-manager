@@ -1,7 +1,7 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "Password Manager",
-  "outputfilename": "Password Manager",
+  "name": "OwlLock",
+  "outputfilename": "OwlLock",
 
   "author": {
     "name": "Akif Kadıoğlu",

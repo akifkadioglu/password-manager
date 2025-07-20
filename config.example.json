@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "OwlLock",
+    "version": "1.0.0",
+    "description": "A secure, cross-platform password manager with owl-like vigilance built with Go and Vue.js",
+    "author": {
+      "name": "Akif Kadıoğlu",
+      "email": "akif.kadioglu.28@gmail.com",
+      "url": "https://github.com/akifkadioglu"
+    },
+    "debug": false
+  },
+  "database": {
+    "type": "sqlite",
+    "name": "passwords.db",
+    "path": "",
+    "log_level": "silent"
+  },
+  "security": {
+    "password_min_length": 6,
+    "password_max_length": 128,
+    "use_fingerprint": true,
+    "encrypt_database": false
+  },
+  "ui": {
+    "theme": "system",
+    "language": "en",
+    "window_width": 1200,
+    "window_height": 800,
+    "resizable": true,
+    "supported_languages": ["en", "tr"]
+  }
+}

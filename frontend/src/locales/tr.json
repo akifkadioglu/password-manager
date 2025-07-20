@@ -1,7 +1,12 @@
 {
+  "navigation": {
+    "home": "Ana Sayfa",
+    "passwordGenerator": "Şifre Üreticisi",
+    "passwords": "Şifrelerim"
+  },
   "landing": {
-    "title": "Güvenli Şifre Yöneticisine Hoş Geldiniz",
-    "subtitle": "Gelişmiş şifre yönetim çözümümüzle şifrelerinizi güvenli bir şekilde saklayın.",
+    "title": "OwlLock'a Hoş Geldiniz",
+    "subtitle": "Baykuş gibi uyanık bir koruma ile gelişmiş şifre yönetim çözümümüzle şifrelerinizi güvenli bir şekilde saklayın.",
     "getStarted": "Hemen başla",
     "features": {
       "secureStorage": {
@@ -18,10 +23,84 @@
       }
     }
   },
+  "passwordGenerator": {
+    "title": "Şifre Üreticisi",
+    "subtitle": "Sistem parmak izi entegrasyonu ile güvenli şifreler oluşturun",
+    "systemFingerprint": "Sistem Parmak İzi",
+    "generatedPassword": "Oluşturulan Şifre",
+    "noPasswordGenerated": "Şifre oluşturmak için butona tıklayın",
+    "length": "Uzunluk",
+    "characterTypes": "Karakter Tipleri",
+    "uppercase": "Büyük Harfler",
+    "lowercase": "Küçük Harfler",
+    "numbers": "Rakamlar",
+    "symbols": "Semboller",
+    "useFingerprint": "Ekstra Güvenlik için Sistem Parmak İzini Kullan",
+    "generate": "Şifre Oluştur",
+    "generating": "Oluşturuluyor...",
+    "copied": "Şifre panoya kopyalandı!",
+    "strength": "Şifre Gücü",
+    "strengthWeak": "Zayıf",
+    "strengthFair": "Orta",
+    "strengthGood": "İyi",
+    "strengthStrong": "Güçlü",
+    "errorGenerating": "Şifre oluşturulurken hata oluştu. Lütfen tekrar deneyin."
+  },
+  "passwordModal": {
+    "title": "Şifreyi Kaydet",
+    "subtitle": "Oluşturduğunuz şifreyi güvenle saklayın",
+    "generatedPassword": "Oluşturulan Şifre",
+    "platform": "Platform/Website",
+    "platformPlaceholder": "örn., Gmail, Facebook, Netflix...",
+    "email": "E-posta",
+    "emailPlaceholder": "eposta@adresiniz.com",
+    "username": "Kullanıcı Adı",
+    "usernamePlaceholder": "Kullanıcı adınız",
+    "description": "Açıklama",
+    "descriptionPlaceholder": "Bu şifre hakkında ek notlar...",
+    "secureStorage": "Şifrelenmiş ve Güvenli Depolama",
+    "save": "Şifreyi Kaydet",
+    "saving": "Kaydediliyor...",
+    "copied": "Şifre panoya kopyalandı!",
+    "errorSaving": "Şifre kaydedilirken hata oluştu. Lütfen tekrar deneyin."
+  },
+  "passwords": {
+    "title": "Şifrelerim",
+    "subtitle": "Kaydettiğiniz şifreleri güvenle yönetin",
+    "addNew": "Yeni Şifre Ekle",
+    "refresh": "Yenile",
+    "totalPasswords": "Toplam Şifre",
+    "securePasswords": "Güvenli Şifre",
+    "platforms": "Platform",
+    "searchPlaceholder": "Şifrelerde ara...",
+    "sortNewest": "Yeniden Eskiye",
+    "sortOldest": "Eskiden Yeniye",
+    "sortPlatform": "Platform A-Z",
+    "loading": "Şifreler yükleniyor...",
+    "noPasswords": "Şifre bulunamadı",
+    "noSearchResults": "Arama sonucu bulunamadı",
+    "getStartedMessage": "Güvenli şifre üreticimiz ile ilk şifrenizi oluşturarak başlayın.",
+    "tryDifferentSearch": "Farklı bir arama terimi deneyin veya yeni şifre oluşturun.",
+    "createFirst": "İlk Şifrenizi Oluşturun",
+    "password": "Şifre",
+    "show": "Göster",
+    "hide": "Gizle",
+    "copy": "Kopyala",
+    "copyPassword": "Şifreyi Kopyala",
+    "delete": "Sil",
+    "confirmDelete": "Bu şifreyi silmek istediğinizden emin misiniz?",
+    "strengthWeak": "Zayıf",
+    "strengthFair": "Orta",
+    "strengthGood": "İyi",
+    "strengthStrong": "Güçlü",
+    "errorLoading": "Şifreler yüklenirken hata oluştu. Lütfen tekrar deneyin.",
+    "errorDeleting": "Şifre silinirken hata oluştu. Lütfen tekrar deneyin."
+  },
   "common": {
     "language": "Dil",
     "theme": "Tema",
     "darkMode": "Karanlık Mod",
-    "lightMode": "Aydınlık Mod"
+    "lightMode": "Aydınlık Mod",
+    "cancel": "İptal"
   }
 }

@@ -1,7 +1,12 @@
 {
+  "navigation": {
+    "home": "Home",
+    "passwordGenerator": "Password Generator",
+    "passwords": "My Passwords"
+  },
   "landing": {
-    "title": "Welcome to Secure Password Manager",
-    "subtitle": "Keep your passwords safe and secure with our advanced password management solution.",
+    "title": "Welcome to OwlLock",
+    "subtitle": "Keep your passwords safe and secure with owl-like vigilance and our advanced password management solution.",
     "getStarted": "Get Started",
     "features": {
       "secureStorage": {
@@ -18,10 +23,84 @@
       }
     }
   },
+  "passwordGenerator": {
+    "title": "Password Generator",
+    "subtitle": "Generate secure passwords with system fingerprint integration",
+    "systemFingerprint": "System Fingerprint",
+    "generatedPassword": "Generated Password",
+    "noPasswordGenerated": "Click generate to create a password",
+    "length": "Length",
+    "characterTypes": "Character Types",
+    "uppercase": "Uppercase Letters",
+    "lowercase": "Lowercase Letters",
+    "numbers": "Numbers",
+    "symbols": "Symbols",
+    "useFingerprint": "Use System Fingerprint for Extra Security",
+    "generate": "Generate Password",
+    "generating": "Generating...",
+    "copied": "Password copied to clipboard!",
+    "strength": "Password Strength",
+    "strengthWeak": "Weak",
+    "strengthFair": "Fair",
+    "strengthGood": "Good",
+    "strengthStrong": "Strong",
+    "errorGenerating": "Error generating password. Please try again."
+  },
+  "passwordModal": {
+    "title": "Save Password",
+    "subtitle": "Store your generated password securely",
+    "generatedPassword": "Generated Password",
+    "platform": "Platform/Website",
+    "platformPlaceholder": "e.g., Gmail, Facebook, Netflix...",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "username": "Username",
+    "usernamePlaceholder": "Your username",
+    "description": "Description",
+    "descriptionPlaceholder": "Additional notes about this password...",
+    "secureStorage": "Encrypted & Secure Storage",
+    "save": "Save Password",
+    "saving": "Saving...",
+    "copied": "Password copied to clipboard!",
+    "errorSaving": "Error saving password. Please try again."
+  },
+  "passwords": {
+    "title": "My Passwords",
+    "subtitle": "Manage your saved passwords securely",
+    "addNew": "Add New Password",
+    "refresh": "Refresh",
+    "totalPasswords": "Total Passwords",
+    "securePasswords": "Secure Passwords",
+    "platforms": "Platforms",
+    "searchPlaceholder": "Search passwords...",
+    "sortNewest": "Newest First",
+    "sortOldest": "Oldest First",
+    "sortPlatform": "Platform A-Z",
+    "loading": "Loading passwords...",
+    "noPasswords": "No passwords found",
+    "noSearchResults": "No search results",
+    "getStartedMessage": "Start by creating your first password with our secure generator.",
+    "tryDifferentSearch": "Try a different search term or create a new password.",
+    "createFirst": "Create Your First Password",
+    "password": "Password",
+    "show": "Show",
+    "hide": "Hide",
+    "copy": "Copy",
+    "copyPassword": "Copy Password",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this password?",
+    "strengthWeak": "Weak",
+    "strengthFair": "Fair",
+    "strengthGood": "Good",
+    "strengthStrong": "Strong",
+    "errorLoading": "Error loading passwords. Please try again.",
+    "errorDeleting": "Error deleting password. Please try again."
+  },
   "common": {
     "language": "Language",
     "theme": "Theme",
     "darkMode": "Dark Mode",
-    "lightMode": "Light Mode"
+    "lightMode": "Light Mode",
+    "cancel": "Cancel"
   }
 }
