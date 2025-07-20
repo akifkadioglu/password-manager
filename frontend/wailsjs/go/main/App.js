@@ -6,6 +6,10 @@ export function DeletePasswordEntry(arg1) {
   return window['go']['main']['App']['DeletePasswordEntry'](arg1);
 }
 
+export function ExportPasswordsEncrypted(arg1) {
+  return window['go']['main']['App']['ExportPasswordsEncrypted'](arg1);
+}
+
 export function GeneratePassword(arg1) {
   return window['go']['main']['App']['GeneratePassword'](arg1);
 }
@@ -16,6 +20,14 @@ export function GetAppInfo() {
 
 export function GetAppSettings() {
   return window['go']['main']['App']['GetAppSettings']();
+}
+
+export function GetBackupOptions() {
+  return window['go']['main']['App']['GetBackupOptions']();
+}
+
+export function GetOwlLockFolderPath() {
+  return window['go']['main']['App']['GetOwlLockFolderPath']();
 }
 
 export function GetPasswordEntries() {
@@ -30,10 +42,22 @@ export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
 
+export function ImportPasswordsEncrypted(arg1, arg2) {
+  return window['go']['main']['App']['ImportPasswordsEncrypted'](arg1, arg2);
+}
+
+export function SaveBackupToOwlLockFolder(arg1, arg2) {
+  return window['go']['main']['App']['SaveBackupToOwlLockFolder'](arg1, arg2);
+}
+
 export function SavePasswordEntry(arg1) {
   return window['go']['main']['App']['SavePasswordEntry'](arg1);
 }
 
 export function UpdateAppSettings(arg1) {
   return window['go']['main']['App']['UpdateAppSettings'](arg1);
+}
+
+export function ValidateEncryptedBackup(arg1) {
+  return window['go']['main']['App']['ValidateEncryptedBackup'](arg1);
 }

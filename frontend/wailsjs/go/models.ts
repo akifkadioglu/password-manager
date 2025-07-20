@@ -1,3 +1,68 @@
+export namespace controller {
+	
+	export class BackupMetadata {
+	    passwordCount: number;
+	    exportDate: string;
+	    version: string;
+	    encrypted: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new BackupMetadata(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.passwordCount = source["passwordCount"];
+	        this.exportDate = source["exportDate"];
+	        this.version = source["version"];
+	        this.encrypted = source["encrypted"];
+	    }
+	}
+	export class BackupOption {
+	    id: string;
+	    name: string;
+	    description: string;
+	    icon: string;
+	    available: boolean;
+	
+	    static createFrom(source: any = {}) {
+	        return new BackupOption(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
+	        this.name = source["name"];
+	        this.description = source["description"];
+	        this.icon = source["icon"];
+	        this.available = source["available"];
+	    }
+	}
+	export class EncryptedBackupData {
+	    version: string;
+	    exportDate: string;
+	    appName: string;
+	    encrypted: boolean;
+	    encryptedPayload: string;
+	    encryptionMethod: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new EncryptedBackupData(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.version = source["version"];
+	        this.exportDate = source["exportDate"];
+	        this.appName = source["appName"];
+	        this.encrypted = source["encrypted"];
+	        this.encryptedPayload = source["encryptedPayload"];
+	        this.encryptionMethod = source["encryptionMethod"];
+	    }
+	}
+
+}
+
 export namespace models {
 	
 	export class PasswordEntry {

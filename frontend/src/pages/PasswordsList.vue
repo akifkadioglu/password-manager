@@ -28,6 +28,34 @@
                 <span>{{ $t('passwords.addNew') }}</span>
               </button>
             </router-link>
+            
+            <!-- Backup & Import Buttons -->
+            <div class="flex gap-2">
+              <button
+                @click="openBackupModal"
+                :disabled="loading || passwords.length === 0"
+                class="flex items-center space-x-2 bg-green-100 dark:bg-green-900/30 hover:bg-green-200 dark:hover:bg-green-800/40 text-green-700 dark:text-green-300 px-4 py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                :title="$t('passwords.exportBackup')"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path :d="icons.download" />
+                </svg>
+                <span class="hidden sm:inline">{{ $t('passwords.backup') }}</span>
+              </button>
+              
+              <button
+                @click="openBackupModalForImport"
+                :disabled="loading"
+                class="flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-800/40 text-blue-700 dark:text-blue-300 px-4 py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                :title="$t('passwords.importBackup')"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path :d="icons.upload" />
+                </svg>
+                <span class="hidden sm:inline">{{ $t('passwords.import') }}</span>
+              </button>
+            </div>
+
             <button
               @click="refreshPasswords"
               :disabled="loading"
@@ -330,10 +358,78 @@
       </div>
     </div>
   </div>
+
+  <!-- Backup Modal -->
+  <BackupModal 
+    ref="backupModal"
+    :is-open="backupModalOpen"
+    :backup-options="backupOptions"
+    @close="closeBackupModal"
+    @select-option="handleBackupOption"
+    @show-notification="handleNotification"
+    @refresh-passwords="refreshPasswords"
+  />
+
+  <!-- Notification Toast -->
+  <transition
+    enter-active-class="transform ease-out duration-300 transition"
+    enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+    enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+    leave-active-class="transition ease-in duration-100"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div
+      v-if="notification.show"
+      class="fixed top-4 right-4 max-w-sm w-full bg-white dark:bg-zinc-800 shadow-2xl rounded-2xl pointer-events-auto ring-1 ring-black ring-opacity-5 z-50"
+    >
+      <div class="p-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg 
+              v-if="notification.type === 'success'"
+              class="h-6 w-6 text-green-400" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <svg 
+              v-else-if="notification.type === 'error'"
+              class="h-6 w-6 text-red-400" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="ml-3 w-0 flex-1 pt-0.5">
+            <p class="text-sm font-medium text-zinc-900 dark:text-zinc-100 whitespace-pre-line">
+              {{ notification.message }}
+            </p>
+          </div>
+          <div class="ml-4 flex-shrink-0 flex">
+            <button
+              @click="hideNotification"
+              class="bg-white dark:bg-zinc-800 rounded-md inline-flex text-zinc-400 dark:text-zinc-500 hover:text-zinc-500 dark:hover:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              <span class="sr-only">Close</span>
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
-import { GetPasswordEntries, DeletePasswordEntry } from '../../wailsjs/go/main/App.js'
+import { GetPasswordEntries, DeletePasswordEntry, GetBackupOptions } from '../../wailsjs/go/main/App.js'
+import BackupModal from '../components/BackupModal.vue'
 import {
   mdiShieldKey,
   mdiPlus,
@@ -350,11 +446,16 @@ import {
   mdiNoteText,
   mdiEye,
   mdiEyeOff,
-  mdiLoading
+  mdiLoading,
+  mdiDownload,
+  mdiUpload
 } from '@mdi/js'
 
 export default {
   name: 'PasswordsList',
+  components: {
+    BackupModal
+  },
   data() {
     return {
       passwords: [],
@@ -362,9 +463,16 @@ export default {
       searchQuery: '',
       sortBy: 'newest',
       sortDropdownOpen: false,
+      backupModalOpen: false,
+      backupOptions: [],
       showPasswords: {},
       activeDropdown: null,
       copyMessage: '',
+      notification: {
+        show: false,
+        message: '',
+        type: 'success' // success, error, info
+      },
       // MDI Icons
       icons: {
         shieldKey: mdiShieldKey,
@@ -382,7 +490,9 @@ export default {
         noteText: mdiNoteText,
         eye: mdiEye,
         eyeOff: mdiEyeOff,
-        loading: mdiLoading
+        loading: mdiLoading,
+        download: mdiDownload,
+        upload: mdiUpload
       }
     }
   },
@@ -434,6 +544,7 @@ export default {
   },
   async mounted() {
     await this.loadPasswords()
+    await this.loadBackupOptions()
     // Close dropdown when clicking outside
     document.addEventListener('click', this.handleClickOutside)
   },
@@ -447,7 +558,7 @@ export default {
         this.passwords = await GetPasswordEntries()
       } catch (error) {
         console.error('Failed to load passwords:', error)
-        alert(this.$t('passwords.errorLoading'))
+        this.showErrorMessage(this.$t('passwords.errorLoading'))
       } finally {
         this.loading = false
       }
@@ -481,6 +592,67 @@ export default {
       this.sortBy = value
       this.sortDropdownOpen = false
     },
+    showSuccessMessage(message) {
+      this.showNotification(message, 'success')
+    },
+    showErrorMessage(message) {
+      this.showNotification(message, 'error')
+    },
+    showNotification(message, type = 'success') {
+      this.notification = {
+        show: true,
+        message: message,
+        type: type
+      }
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        this.hideNotification()
+      }, 5000)
+    },
+    hideNotification() {
+      this.notification.show = false
+    },
+    async loadBackupOptions() {
+      try {
+        this.backupOptions = await GetBackupOptions()
+      } catch (error) {
+        console.error('Failed to load backup options:', error)
+        // Set default options if API fails
+        this.backupOptions = [
+          {
+            id: 'local',
+            name: 'Local Computer',
+            description: 'Save backup file to your computer',
+            icon: 'computer',
+            available: true
+          }
+        ]
+      }
+    },
+    openBackupModal() {
+      this.backupModalOpen = true
+    },
+    openBackupModalForImport() {
+      this.backupModalOpen = true
+      // Modal açıldıktan sonra import step'ine geç
+      this.$nextTick(() => {
+        const backupModal = this.$refs.backupModal
+        if (backupModal && typeof backupModal.showImportStep === 'function') {
+          backupModal.showImportStep()
+        }
+      })
+    },
+    closeBackupModal() {
+      this.backupModalOpen = false
+    },
+    handleNotification(notification) {
+      this.showNotification(notification.message, notification.type)
+    },
+    async handleBackupOption(option) {
+      // Backup modal artık kendi içinde handle ediyor
+      this.closeBackupModal()
+    },
     async copyPassword(password) {
       try {
         await navigator.clipboard.writeText(password)
@@ -511,7 +683,7 @@ export default {
         console.log('Password deleted successfully')
       } catch (error) {
         console.error('Failed to delete password:', error)
-        alert(this.$t('passwords.errorDeleting'))
+        this.showErrorMessage(this.$t('passwords.errorDeleting'))
       }
     },
     formatDate(dateString) {

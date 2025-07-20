@@ -1,7 +1,9 @@
 package database
 
 import (
+	"crypto/rand"
 	"fmt"
+	"math/big"
 	"os"
 	"path/filepath"
 
@@ -21,6 +23,22 @@ type Service struct {
 // NewService creates a new database service
 func NewService() *Service {
 	return &Service{}
+}
+
+// generateID generates a random string ID for password entries
+func (s *Service) generateID() (string, error) {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	const idLength = 16
+	
+	id := make([]byte, idLength)
+	for i := range id {
+		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
+		if err != nil {
+			return "", err
+		}
+		id[i] = charset[num.Int64()]
+	}
+	return string(id), nil
 }
 
 // Initialize initializes the SQLite database
@@ -73,6 +91,15 @@ func (s *Service) Initialize() error {
 func (s *Service) SavePasswordEntry(entry models.PasswordEntry) (models.PasswordEntry, error) {
 	if s.db == nil {
 		return entry, fmt.Errorf("database not initialized")
+	}
+
+	// Generate a new ID if entry doesn't have one
+	if entry.ID == "" {
+		id, err := s.generateID()
+		if err != nil {
+			return entry, fmt.Errorf("failed to generate ID: %v", err)
+		}
+		entry.ID = id
 	}
 
 	if err := s.db.Create(&entry).Error; err != nil {

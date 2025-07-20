@@ -67,7 +67,7 @@ const isActiveRoute = (routeName) => {
             </div>
             
             <!-- Brand Text -->
-            <div class="hidden sm:block">
+            <div class="">
               <h1 class="text-xl font-bold bg-gradient-to-r from-sky-600 via-sky-600 to-sky-700 bg-clip-text text-transparent">
                 OwlLock
               </h1>
