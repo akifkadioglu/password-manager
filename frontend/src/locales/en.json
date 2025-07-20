@@ -1,0 +1,27 @@
+{
+  "landing": {
+    "title": "Welcome to Secure Password Manager",
+    "subtitle": "Keep your passwords safe and secure with our advanced password management solution.",
+    "getStarted": "Get Started",
+    "features": {
+      "secureStorage": {
+        "title": "Secure Storage",
+        "description": "Your passwords are encrypted and stored securely using advanced encryption algorithms."
+      },
+      "easyAccess": {
+        "title": "Easy Access",
+        "description": "Access your passwords anywhere, anytime with our user-friendly interface."
+      },
+      "passwordGenerator": {
+        "title": "Password Generator",
+        "description": "Generate strong, unique passwords with our built-in password generator."
+      }
+    }
+  },
+  "common": {
+    "language": "Language",
+    "theme": "Theme",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
+  }
+}

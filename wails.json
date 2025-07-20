@@ -1,13 +1,19 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
   "name": "Password Manager",
-  "outputfilename": "password-manager",
+  "outputfilename": "Password Manager",
+
+  "author": {
+    "name": "Akif Kadıoğlu",
+    "email": "akif.kadioglu.28@gmail.com"
+  },
+
   "frontend:install": "npm install",
   "frontend:build": "npm run build",
   "frontend:dev:watcher": "npm run dev",
   "frontend:dev:serverUrl": "auto",
-  "author": {
-    "name": "Akif Kadıoğlu",
-    "email": "akif.kadioglu.28@gmail.com"
-  }
+
+  "resources": [
+    "assets/**/*"
+  ]
 }

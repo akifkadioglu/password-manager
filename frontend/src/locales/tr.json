@@ -1,0 +1,27 @@
+{
+  "landing": {
+    "title": "Güvenli Şifre Yöneticisine Hoş Geldiniz",
+    "subtitle": "Gelişmiş şifre yönetim çözümümüzle şifrelerinizi güvenli bir şekilde saklayın.",
+    "getStarted": "Hemen başla",
+    "features": {
+      "secureStorage": {
+        "title": "Güvenli Depolama",
+        "description": "Şifreleriniz gelişmiş şifreleme algoritmaları kullanılarak güvenli bir şekilde şifrelenir ve saklanır."
+      },
+      "easyAccess": {
+        "title": "Kolay Erişim",
+        "description": "Kullanıcı dostu arayüzümüz ile şifrelerinize her yerden, her zaman erişin."
+      },
+      "passwordGenerator": {
+        "title": "Şifre Üreticisi",
+        "description": "Yerleşik şifre üreticimiz ile güçlü, benzersiz şifreler oluşturun."
+      }
+    }
+  },
+  "common": {
+    "language": "Dil",
+    "theme": "Tema",
+    "darkMode": "Karanlık Mod",
+    "lightMode": "Aydınlık Mod"
+  }
+}
