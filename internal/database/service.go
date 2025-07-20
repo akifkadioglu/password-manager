@@ -29,7 +29,7 @@ func NewService() *Service {
 func (s *Service) generateID() (string, error) {
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	const idLength = 16
-	
+
 	id := make([]byte, idLength)
 	for i := range id {
 		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
