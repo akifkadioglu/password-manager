@@ -1121,6 +1121,10 @@ video {
   min-width: 200px;
 }
 
+.min-w-\[160px\] {
+  min-width: 160px;
+}
+
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -1155,6 +1159,10 @@ video {
 
 .origin-center {
   transform-origin: center;
+}
+
+.origin-top-right {
+  transform-origin: top right;
 }
 
 .translate-x-0 {
@@ -1661,6 +1669,12 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-sky-600 {
+  --tw-gradient-from: #0284c7 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(2 132 199 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .via-primary-700 {
   --tw-gradient-to: rgb(255 255 255 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--primary-700) var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -1684,6 +1698,11 @@ video {
 .via-sky-500 {
   --tw-gradient-to: rgb(14 165 233 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #0ea5e9 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-sky-600 {
+  --tw-gradient-to: rgb(2 132 199 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #0284c7 var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 .to-primary-800 {
@@ -1728,6 +1747,10 @@ video {
 
 .to-sky-600 {
   --tw-gradient-to: #0284c7 var(--tw-gradient-to-position);
+}
+
+.to-sky-700 {
+  --tw-gradient-to: #0369a1 var(--tw-gradient-to-position);
 }
 
 .bg-clip-text {
@@ -2017,6 +2040,10 @@ video {
   color: rgb(120 53 15 / var(--tw-text-opacity, 1));
 }
 
+.text-primary-500 {
+  color: var(--primary-500);
+}
+
 .placeholder-zinc-500::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(113 113 122 / var(--tw-placeholder-opacity, 1));
@@ -2277,6 +2304,10 @@ body {
 
 .hover\:bg-zinc-50\/80:hover {
   background-color: rgb(250 250 250 / 0.8);
+}
+
+.hover\:bg-primary-50:hover {
+  background-color: var(--primary-50);
 }
 
 .hover\:from-primary-700:hover {
@@ -2715,5 +2746,25 @@ body {
   .xl\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.\[\&\>option\]\:bg-white>option {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.\[\&\>option\]\:text-zinc-900>option {
+  --tw-text-opacity: 1;
+  color: rgb(24 24 27 / var(--tw-text-opacity, 1));
+}
+
+.\[\&\>option\]\:dark\:bg-zinc-700:is([data-theme="dark"] *)>option {
+  --tw-bg-opacity: 1;
+  background-color: rgb(63 63 70 / var(--tw-bg-opacity, 1));
+}
+
+.\[\&\>option\]\:dark\:text-zinc-100:is([data-theme="dark"] *)>option {
+  --tw-text-opacity: 1;
+  color: rgb(244 244 245 / var(--tw-text-opacity, 1));
 }
 

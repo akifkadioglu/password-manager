@@ -68,7 +68,7 @@ const isActiveRoute = (routeName) => {
             
             <!-- Brand Text -->
             <div class="hidden sm:block">
-              <h1 class="text-xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent">
+              <h1 class="text-xl font-bold bg-gradient-to-r from-sky-600 via-sky-600 to-sky-700 bg-clip-text text-transparent">
                 OwlLock
               </h1>
               <p class="text-xs text-zinc-500 dark:text-zinc-400 -mt-1 font-medium">
@@ -101,7 +101,7 @@ const isActiveRoute = (routeName) => {
         <!-- Controls Section -->
         <div class="flex items-center space-x-3">
           <!-- Desktop Controls -->
-          <div class="hidden sm:flex items-center space-x-3">
+          <div class="hidden md:flex items-center space-x-3">
             <div class="h-6 w-px bg-zinc-300 dark:bg-zinc-600"></div>
             <LanguageSelector />
             <ThemeToggle v-model="toggleValue" />

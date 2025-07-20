@@ -7,7 +7,7 @@
           <div class="flex justify-center mb-6">
             <div class="p-4 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl shadow-2xl">
               <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12,1L21,5V9C21,16.55 15.84,23.74 9,23.74C2.16,23.74 -3,16.55 -3,9V5L12,1M12,7A2,2 0 0,0 10,9A2,2 0 0,0 12,11A2,2 0 0,0 14,9A2,2 0 0,0 12,7Z" />
+                <path :d="icons.shieldKey" />
               </svg>
             </div>
           </div>
@@ -23,7 +23,7 @@
             <router-link to="/password-generator">
               <button class="flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                  <path :d="icons.plus" />
                 </svg>
                 <span>{{ $t('passwords.addNew') }}</span>
               </button>
@@ -39,7 +39,7 @@
                 fill="currentColor" 
                 viewBox="0 0 24 24"
               >
-                <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" />
+                <path :d="icons.refresh" />
               </svg>
               <span>{{ $t('passwords.refresh') }}</span>
             </button>
@@ -52,7 +52,7 @@
             <div class="flex items-center space-x-4">
               <div class="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
                 <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,1L21,5V9C21,16.55 15.84,23.74 9,23.74C2.16,23.74 -3,16.55 -3,9V5L12,1Z" />
+                  <path :d="icons.shield" />
                 </svg>
               </div>
               <div>
@@ -66,7 +66,7 @@
             <div class="flex items-center space-x-4">
               <div class="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
                 <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+                  <path :d="icons.check" />
                 </svg>
               </div>
               <div>
@@ -80,7 +80,7 @@
             <div class="flex items-center space-x-4">
               <div class="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
                 <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L12,2L3,7V9C3,14.55 6.84,19.74 12,19.74C17.16,19.74 21,14.55 21,9M12,17C8.13,17 5,14.72 5,9H19C19,14.72 15.87,17 12,17Z" />
+                  <path :d="icons.web" />
                 </svg>
               </div>
               <div>
@@ -97,7 +97,7 @@
             <div class="flex-1">
               <div class="relative">
                 <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                  <path :d="icons.magnify" />
                 </svg>
                 <input
                   v-model="searchQuery"
@@ -107,14 +107,64 @@
                 />
               </div>
             </div>
-            <select
-              v-model="sortBy"
-              class="px-4 py-3 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-zinc-50 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-            >
-              <option value="newest">{{ $t('passwords.sortNewest') }}</option>
-              <option value="oldest">{{ $t('passwords.sortOldest') }}</option>
-              <option value="platform">{{ $t('passwords.sortPlatform') }}</option>
-            </select>
+            <!-- Custom Sort Dropdown -->
+            <div class="relative inline-block text-left">
+              <button
+                @click="sortDropdownOpen = !sortDropdownOpen"
+                class="inline-flex items-center justify-between w-full px-4 py-3 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-zinc-50 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors min-w-[160px]"
+              >
+                <span>{{ getSortOptionText(sortBy) }}</span>
+                <svg 
+                  class="ml-2 h-5 w-5 transform transition-transform duration-200" 
+                  :class="{ 'rotate-180': sortDropdownOpen }"
+                  fill="currentColor" 
+                  viewBox="0 0 20 20"
+                >
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <!-- Backdrop -->
+              <div 
+                v-if="sortDropdownOpen"
+                @click="sortDropdownOpen = false"
+                class="fixed inset-0 z-40"
+              ></div>
+
+              <!-- Dropdown Menu -->
+              <transition
+                enter-active-class="transition duration-200 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-150 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0"
+              >
+                <div
+                  v-show="sortDropdownOpen"
+                  class="origin-top-right absolute right-0 mt-2 w-full min-w-[160px] rounded-xl shadow-2xl bg-white dark:bg-zinc-800 ring-1 ring-black ring-opacity-5 z-50"
+                >
+                  <div class="py-2">
+                    <button
+                      v-for="option in sortOptions"
+                      :key="option.value"
+                      @click="setSortBy(option.value)"
+                      class="w-full text-left px-4 py-3 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 flex items-center transition-all duration-150"
+                      :class="{ 
+                        'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-medium': sortBy === option.value
+                      }"
+                    >
+                      <span class="flex-1">{{ option.text }}</span>
+                      <span v-if="sortBy === option.value" class="ml-2 text-primary-500">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </transition>
+            </div>
           </div>
         </div>
 
@@ -122,7 +172,7 @@
         <div v-if="loading" class="text-center py-12">
           <div class="inline-flex items-center space-x-2">
             <svg class="w-6 h-6 animate-spin text-primary-600" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" />
+              <path :d="icons.loading" />
             </svg>
             <span class="text-lg text-zinc-600 dark:text-zinc-300">{{ $t('passwords.loading') }}</span>
           </div>
@@ -132,7 +182,7 @@
           <div class="mb-6">
             <div class="w-24 h-24 bg-zinc-100 dark:bg-zinc-700 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg class="w-12 h-12 text-zinc-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12,1L21,5V9C21,16.55 15.84,23.74 9,23.74C2.16,23.74 -3,16.55 -3,9V5L12,1M12,7A2,2 0 0,0 10,9A2,2 0 0,0 12,11A2,2 0 0,0 14,9A2,2 0 0,0 12,7Z" />
+                <path :d="icons.shieldKey" />
               </svg>
             </div>
             <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
@@ -178,7 +228,7 @@
                   class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors opacity-0 group-hover:opacity-100"
                 >
                   <svg class="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
+                    <path :d="icons.dotsVertical" />
                   </svg>
                 </button>
                 
@@ -192,7 +242,7 @@
                     class="flex items-center space-x-3 w-full px-4 py-2 text-left text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-600 transition-colors"
                   >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                      <path :d="icons.contentCopy" />
                     </svg>
                     <span>{{ $t('passwords.copyPassword') }}</span>
                   </button>
@@ -201,7 +251,7 @@
                     class="flex items-center space-x-3 w-full px-4 py-2 text-left text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                   >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                      <path :d="icons.delete" />
                     </svg>
                     <span>{{ $t('passwords.delete') }}</span>
                   </button>
@@ -213,21 +263,21 @@
             <div class="space-y-3">
               <div v-if="password.email" class="flex items-center space-x-3">
                 <svg class="w-4 h-4 text-zinc-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,5.11 21.11,4 20,4Z" />
+                  <path :d="icons.email" />
                 </svg>
                 <span class="text-sm text-zinc-600 dark:text-zinc-300 truncate">{{ password.email }}</span>
               </div>
               
               <div v-if="password.username" class="flex items-center space-x-3">
                 <svg class="w-4 h-4 text-zinc-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                  <path :d="icons.account" />
                 </svg>
                 <span class="text-sm text-zinc-600 dark:text-zinc-300 truncate">{{ password.username }}</span>
               </div>
 
               <div v-if="password.description" class="flex items-start space-x-3">
                 <svg class="w-4 h-4 text-zinc-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                  <path :d="icons.noteText" />
                 </svg>
                 <span class="text-sm text-zinc-600 dark:text-zinc-300">{{ password.description }}</span>
               </div>
@@ -259,8 +309,7 @@
                   class="flex items-center space-x-2 text-sm text-zinc-600 dark:text-zinc-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                 >
                   <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path v-if="!showPasswords[password.id]" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
-                    <path v-else d="M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.09L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.76,7.13 11.37,7 12,7Z" />
+                    <path :d="showPasswords[password.id] ? icons.eyeOff : icons.eye" />
                   </svg>
                   <span>{{ showPasswords[password.id] ? $t('passwords.hide') : $t('passwords.show') }}</span>
                 </button>
@@ -270,7 +319,7 @@
                   class="flex items-center space-x-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm transition-colors"
                 >
                   <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                    <path :d="icons.contentCopy" />
                   </svg>
                   <span>{{ $t('passwords.copy') }}</span>
                 </button>
@@ -285,6 +334,24 @@
 
 <script>
 import { GetPasswordEntries, DeletePasswordEntry } from '../../wailsjs/go/main/App.js'
+import {
+  mdiShieldKey,
+  mdiPlus,
+  mdiRefresh,
+  mdiShield,
+  mdiCheck,
+  mdiWeb,
+  mdiMagnify,
+  mdiDotsVertical,
+  mdiContentCopy,
+  mdiDelete,
+  mdiEmail,
+  mdiAccount,
+  mdiNoteText,
+  mdiEye,
+  mdiEyeOff,
+  mdiLoading
+} from '@mdi/js'
 
 export default {
   name: 'PasswordsList',
@@ -294,12 +361,39 @@ export default {
       loading: false,
       searchQuery: '',
       sortBy: 'newest',
+      sortDropdownOpen: false,
       showPasswords: {},
       activeDropdown: null,
-      copyMessage: ''
+      copyMessage: '',
+      // MDI Icons
+      icons: {
+        shieldKey: mdiShieldKey,
+        plus: mdiPlus,
+        refresh: mdiRefresh,
+        shield: mdiShield,
+        check: mdiCheck,
+        web: mdiWeb,
+        magnify: mdiMagnify,
+        dotsVertical: mdiDotsVertical,
+        contentCopy: mdiContentCopy,
+        delete: mdiDelete,
+        email: mdiEmail,
+        account: mdiAccount,
+        noteText: mdiNoteText,
+        eye: mdiEye,
+        eyeOff: mdiEyeOff,
+        loading: mdiLoading
+      }
     }
   },
   computed: {
+    sortOptions() {
+      return [
+        { value: 'newest', text: this.$t('passwords.sortNewest') },
+        { value: 'oldest', text: this.$t('passwords.sortOldest') },
+        { value: 'platform', text: this.$t('passwords.sortPlatform') }
+      ]
+    },
     filteredPasswords() {
       let filtered = this.passwords
 
@@ -376,7 +470,16 @@ export default {
     handleClickOutside(event) {
       if (!event.target.closest('.relative')) {
         this.closeDropdown()
+        this.sortDropdownOpen = false
       }
+    },
+    getSortOptionText(value) {
+      const option = this.sortOptions.find(opt => opt.value === value)
+      return option ? option.text : this.$t('passwords.sortNewest')
+    },
+    setSortBy(value) {
+      this.sortBy = value
+      this.sortDropdownOpen = false
     },
     async copyPassword(password) {
       try {
