@@ -17,12 +17,12 @@
 
 ## 📋 Table of Contents
 
-- [About](#about)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Building](#building)
-- [Configuration](#configuration)
-- [License](#license)
+- [About](#-about)
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Building](#-building)
+- [Configuration](#-configuration)
+- [License](#-license)
 
 ## 🎯 About
 
